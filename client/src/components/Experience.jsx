@@ -7,41 +7,45 @@ const Experience = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const experiences = [
-    {
-      role: 'Full Stack Developer',
-      company: 'Shadval Pay',
-      period: '2023 - Present',
-      achievements: [
-        'Architected and deployed a MERN-based microfinance management portal serving 5,000+ active users',
-        'Reduced loan processing time by 70% through automated workflows and real-time analytics dashboard',
-        'Implemented secure authentication and role-based access control for multi-tier user management',
-      ],
-      tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'REST APIs'],
-    },
-    {
-      role: 'Full Stack Developer',
-      company: 'Shadval Pay',
-      period: '2022 - 2023',
-      achievements: [
-        'Built end-to-end digital loan platform with KYC integration and instant eligibility verification',
-        'Processed 200+ loans in first month with 99% uptime and zero security incidents',
-        'Designed responsive UI with Tailwind CSS ensuring seamless experience across all devices',
-      ],
-      tech: ['React.js', 'Node.js', 'Firebase', 'Tailwind CSS', 'API Integration'],
-    },
-    {
-      role: 'Mobile Developer',
-      company: 'Shadval Pay',
-      period: '2022',
-      achievements: [
-        'Developed cross-platform file sharing app using Flutter with end-to-end encryption',
-        'Implemented real-time activity feed and push notifications for team collaboration',
-        'Achieved 4.5+ star rating with 1,000+ downloads in first quarter',
-      ],
-      tech: ['Flutter', 'Firebase', 'REST APIs', 'Real-time Database'],
-    },
-  ];
+ const experiences = [
+  {
+    role: 'Full Stack Developer',
+    company: 'Shadval Pay',
+    period: 'Sep 2025 – Present',
+    achievements: [
+      'Developed and maintained a microfinance management portal using React, Node.js, and Express, streamlining loan workflows and reducing manual processing efforts',
+      'Designed and integrated RESTful APIs, improving data flow efficiency and reducing average API response time by ~20%',
+      'Collaborated on integrating C# backend services with frontend applications, ensuring seamless cross-technology communication',
+      'Built responsive and user-friendly dashboards for internal teams, improving data visibility and operational decision-making',
+      'Optimized backend queries and database interactions in MongoDB, enhancing system performance under concurrent usage',
+      'Worked closely with product and business teams to translate requirements into scalable and maintainable features',
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'C#', 'REST APIs'],
+  },
+  {
+    role: 'Full Stack Developer Intern',
+    company: 'Cognify',
+    period: 'Jan 2025 – Apr 2025',
+    achievements: [
+      'Developed dynamic and reusable UI components using React.js, improving application consistency and development speed',
+      'Built and tested REST APIs using Node.js and Express, ensuring reliable communication between frontend and backend systems',
+      'Used Postman for API validation and debugging, reducing integration issues during development cycles',
+      'Improved application responsiveness and load performance through efficient state management and component structuring',
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'Postman', 'REST APIs'],
+  },
+  {
+    role: 'Full Stack Intern',
+    company: 'People IT Services',
+    period: 'Sep 2024 – Oct 2024',
+    achievements: [
+      'Assisted in debugging and improving existing React and Node.js applications, resolving UI and API-level issues',
+      'Worked with MongoDB to manage and optimize NoSQL database queries for better performance',
+      'Collaborated with senior developers to understand production-level code structure and best practices',
+    ],
+    tech: ['React.js', 'Node.js', 'MongoDB'],
+  },
+];
 
   return (
     <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-transparent to-blue-500/5" ref={ref}>
