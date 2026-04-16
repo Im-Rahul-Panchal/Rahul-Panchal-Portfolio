@@ -170,8 +170,8 @@ Target metrics (Lighthouse):
 
 ## 🤝 Contact
 
-- Email: rahul@example.com
-- GitHub: [@rahulpanchal](https://github.com/rahulpanchal)
+- Email: rahulpanchal2807@example.com
+- GitHub: [@rahulpanchal](https://github.com/IamRahulpanchal)
 - LinkedIn: [Rahul Panchal](https://linkedin.com/in/rahulpanchal)
 
 ---

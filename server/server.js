@@ -11,7 +11,9 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 
 // Rate limiting
@@ -81,7 +83,7 @@ app.post('/api/contact', limiter, async (req, res) => {
 
     res.status(200).json({ 
       message: 'Message sent successfully!',
-      success: true 
+      // success: true 
     });
 
   } catch (error) {
