@@ -26,8 +26,8 @@ const Projects = () => {
       impact: 'Delivered fast performance, responsive UI, and stable API integration improving overall user experience.',
       tech: ['React 19', 'Vite', 'Tailwind CSS', 'Radix UI', 'Framer Motion', 'React Router', 'Node.js', 'Express.js', 'SQL'],
       image: '/projects/shadvalpay.jpg',
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: 'https://react.shadvalpay.co.in/',
+      githubUrl: 'https://github.com/Im-Rahul-Panchal/ShadvalPay---Company-Website-Platform-Interface',
       gradient: 'from-yellow-500 to-cyan-500',
     },
     {
@@ -60,7 +60,7 @@ const Projects = () => {
       tech: ['Flutter', 'Dart', 'Provider', 'Material UI'],
       image: '/projects/flutter-catalogue.jpg',
       liveUrl: '#',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/Im-Rahul-Panchal/CatalogApp-Flutter',
       gradient: 'from-indigo-500 to-purple-500',
     },
     {
