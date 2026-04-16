@@ -30,7 +30,7 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await fetch('https://rahul-portfolio-backend-5ufa.onrender.com//api/contact', {
+      const response = await fetch('https://rahul-portfolio-backend-5ufa.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
