@@ -2,6 +2,11 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, GitBranch } from 'lucide-react';
+import micro from "../assets/microFin.png";
+import shadval from "../assets/shadval.png";
+import finance from "../assets/finance.png";
+import port from "../assets/port.png";
+import catalog from "../assets/catalog.png";
 
 const Projects = () => {
   const ref = useRef(null);
@@ -11,10 +16,10 @@ const Projects = () => {
     {
       title: 'Microfinance Management Portal',
       problem: 'Rural microfinance institutions struggled with manual loan tracking and repayment collection.',
-      solution: 'Built a full-stack MERN dashboard with real-time analytics and automated reminders.',
-      impact: 'Reduced processing time by 70% for 5,000+ users',
+      solution: 'Built a full-stack MERN dashboard with real-time analytics, automated reminders, and a responsive, user-friendly interface for smooth operations.',
+      impact: 'Reduced processing time by 70%, improving efficiency and workflow speed for over 1,000 active users through automation and optimized processes.',
       tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Chart.js'],
-      image: '/projects/microfinance.jpg',
+      image: micro,
       liveUrl: 'https://microfin-demo-react.shadvalpay.co.in/',
       githubUrl: 'https://github.com/Im-Rahul-Panchal/Microfinance-ShadvalPay',
       gradient: 'from-blue-500 to-cyan-500',
@@ -25,7 +30,7 @@ const Projects = () => {
       solution: 'Built a scalable React + Vite frontend with smooth animations and integrated backend APIs for form handling.',
       impact: 'Delivered fast performance, responsive UI, and stable API integration improving overall user experience.',
       tech: ['React 19', 'Vite', 'Tailwind CSS', 'Radix UI', 'Framer Motion', 'React Router', 'Node.js', 'Express.js', 'SQL'],
-      image: '/projects/shadvalpay.jpg',
+      image: shadval,
       liveUrl: 'https://react.shadvalpay.co.in/',
       githubUrl: 'https://github.com/Im-Rahul-Panchal/ShadvalPay---Company-Website-Platform-Interface',
       gradient: 'from-yellow-500 to-cyan-500',
@@ -36,7 +41,7 @@ const Projects = () => {
       solution: 'End-to-end digital lending platform with KYC integration and instant eligibility checks.',
       impact: 'Processed 200+ loans in first month with 99% uptime',
       tech: ['React.js', 'Node.js', 'Firebase', 'Tailwind CSS', 'REST APIs'],
-      image: '/projects/loan-platform.jpg',
+      image: finance,
       liveUrl: 'https://finance.shadvalpay.co.in/',
       githubUrl: 'https://github.com/Im-Rahul-Panchal/ShadvalFinance',
       gradient: 'from-purple-500 to-pink-500',
@@ -47,7 +52,7 @@ const Projects = () => {
       solution: 'Cross-platform mobile + web app with end-to-end encryption and activity feed.',
       impact: '4.5+ star rating with 1,000+ downloads',
       tech: ['Flutter', 'Firebase', 'Real-time DB', 'Cloud Storage'],
-      image: '/projects/file-sharing.jpg',
+      // image: '/projects/file-sharing.jpg',
       liveUrl: '#',
       githubUrl: '#',
       gradient: 'from-orange-500 to-red-500',
@@ -58,7 +63,7 @@ const Projects = () => {
       solution: 'Developed a Flutter app with structured navigation, category-based browsing, and a cart system with dummy checkout.',
       impact: 'Delivered smooth performance, organized state management, and a consistent user experience across multiple platforms.',
       tech: ['Flutter', 'Dart', 'Provider', 'Material UI'],
-      image: '/projects/flutter-catalogue.jpg',
+      image: catalog,
       liveUrl: '#',
       githubUrl: 'https://github.com/Im-Rahul-Panchal/CatalogApp-Flutter',
       gradient: 'from-indigo-500 to-purple-500',
@@ -66,10 +71,10 @@ const Projects = () => {
     {
       title: 'Portfolio Website',
       problem: 'Need to showcase skills and projects in a premium, performant way.',
-      solution: 'Built this modern portfolio with React 19, Framer Motion, and performance-first approach.',
-      impact: 'Lighthouse score 95+ across all metrics',
+      solution: 'Built this modern portfolio using React 19, Framer Motion, and a performance-first approach with optimized and responsive design.',
+      impact: 'Achieved a Lighthouse score of 95+ across all major metrics including performance, accessibility, ensuring a fast and production-ready experience.',
       tech: ['React 19', 'Vite', 'Tailwind CSS', 'Framer Motion'],
-      image: '/projects/portfolio.jpg',
+      image: port,
       liveUrl: 'https://khushboopanchal.netlify.app/',
       githubUrl: 'https://github.com/Im-Rahul-Panchal/Accountant-Portfolio',
       gradient: 'from-green-500 to-emerald-500',
@@ -102,10 +107,23 @@ const Projects = () => {
               className="glass rounded-2xl overflow-hidden group will-change-transform"
             >
               {/* Project Image */}
-              <div className={`h-48 bg-linear-to-br ${project.gradient} relative overflow-hidden`}>
+              <div className="h-48 relative overflow-hidden">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className={`w-full h-full bg-gradient-to-br ${project.gradient}`} />
+                )}
+
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
+
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-2xl font-bold text-white text-center px-4">{project.title}</h3>
+                  <h3 className="text-2xl font-bold text-white text-center px-4">
+                    {project.title}
+                  </h3>
                 </div>
               </div>
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
@@ -8,20 +7,12 @@ const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -32,121 +23,96 @@ const Contact = () => {
     try {
       const response = await fetch('https://rahul-portfolio-backend-5ufa.onrender.com/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setStatus({
-          type: 'success',
-          message: 'Message sent successfully! I\'ll get back to you soon.',
-        });
+        setStatus({ type: 'success', message: "Message sent successfully! I'll reply soon." });
         setFormData({ name: '', email: '', message: '' });
       } else {
-        setStatus({
-          type: 'error',
-          message: data.message || 'Something went wrong. Please try again.',
-        });
+        setStatus({ type: 'error', message: data.message || 'Something went wrong.' });
       }
     } catch (error) {
-      setStatus({
-        type: 'error',
-        message: 'Failed to send message. Please try again later.',
-      });
+      setStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-transparent to-purple-500/5" ref={ref}>
+    <section id="contact" className="py-28 px-6 bg-[#0a0a0a]" ref={ref}>
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Get In <span className="gradient-text">Touch</span>
+          <h2 className="text-6xl font-bold tracking-tighter mb-4">
+            Get In <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Touch</span>
           </h2>
-          <p className="text-gray-400 text-lg">Have a project in mind? Let's work together!</p>
+          <p className="text-zinc-400 text-xl">Have an exciting project? Let's create something amazing together.</p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="glass rounded-2xl p-8 sm:p-12"
+          className="glass rounded-3xl p-12 border border-white/10"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                placeholder="Your name"
-              />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-sm font-medium text-zinc-400 mb-3">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-zinc-500 transition-all"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-400 mb-3">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-zinc-500 transition-all"
+                  placeholder="your@email.com"
+                />
+              </div>
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                placeholder="your.email@example.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                Message
-              </label>
+              <label className="block text-sm font-medium text-zinc-400 mb-3">Message</label>
               <textarea
-                id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
-                rows={6}
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+                rows={7}
+                className="w-full px-6 py-4 rounded-3xl bg-white/5 border border-white/10 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-zinc-500 resize-none transition-all"
                 placeholder="Tell me about your project..."
               />
             </div>
 
             {status.message && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex items-center gap-2 p-4 rounded-lg ${
-                  status.type === 'success'
-                    ? 'bg-green-500/10 border border-green-500/20 text-green-400'
-                    : 'bg-red-500/10 border border-red-500/20 text-red-400'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`flex items-center gap-3 p-5 rounded-2xl ${
+                  status.type === 'success' 
+                    ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400' 
+                    : 'bg-red-500/10 border border-red-500/30 text-red-400'
                 }`}
               >
-                {status.type === 'success' ? (
-                  <CheckCircle size={20} />
-                ) : (
-                  <AlertCircle size={20} />
-                )}
+                {status.type === 'success' ? <CheckCircle size={24} /> : <AlertCircle size={24} />}
                 <span>{status.message}</span>
               </motion.div>
             )}
@@ -156,29 +122,25 @@ const Contact = () => {
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-2xl hover:shadow-blue-500/50 transition-all disabled:opacity-50 cursor-pointer"
+              className="w-full py-5 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold text-lg flex items-center justify-center gap-3 disabled:opacity-70 transition-all shadow-xl shadow-purple-500/30 cursor-pointer"
             >
               {isSubmitting ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Sending...
-                </>
+                <>Sending<span className="animate-pulse">...</span></>
               ) : (
                 <>
-                  <Send size={20} />
-                  Send Message
+                  Send Message <Send size={22} />
                 </>
               )}
             </motion.button>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-white/10 text-center">
-            <p className="text-gray-400 mb-4">Or reach out directly</p>
+          <div className="mt-12 pt-10 border-t border-white/10 text-center">
+            <p className="text-zinc-400 mb-4">Or reach me directly at</p>
             <a
-              href="mailto:rahul@example.com"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+              href="mailto:rahulpanchal2807@gmail.com"
+              className="inline-flex items-center gap-3 text-blue-400 hover:text-blue-300 text-lg transition-colors"
             >
-              <Mail size={20} />
+              <Mail size={26} />
               rahulpanchal2807@gmail.com
             </a>
           </div>
@@ -189,4 +151,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

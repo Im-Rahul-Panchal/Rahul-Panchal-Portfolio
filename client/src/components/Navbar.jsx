@@ -7,9 +7,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -33,91 +31,85 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'backdrop-blur-2xl bg-black/70 shadow-2xl' 
+          : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <motion.a
             href="#"
-            className="text-xl font-bold gradient-text"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+            whileHover={{ scale: 1.08 }}
           >
             Rahul Panchal
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-gradient-to-r after:from-blue-500 after:to-purple-500 after:w-0 hover:after:w-full after:transition-all"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
+
             <motion.button
               onClick={handleDownloadResume}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/50 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm hover:shadow-xl hover:shadow-purple-500/40 transition-all"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.96 }}
             >
-              <Download size={16} />
-              Resume
+              <Download size={18} /> Resume
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2"
-            aria-label="Toggle menu"
+            className="md:hidden text-white p-3"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Enhanced Glass */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-white/10"
+            className="md:hidden backdrop-blur-3xl bg-black/90 border-t border-white/10"
           >
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link, index) => (
+            <div className="px-6 py-8 space-y-6 text-lg">
+              {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-gray-300 hover:text-white transition-colors py-2"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  className="block text-zinc-300 hover:text-white py-2 transition"
                 >
                   {link.name}
                 </motion.a>
               ))}
               <motion.button
-                onClick={() => {
-                  handleDownloadResume();
-                  setIsMobileMenuOpen(false);
-                }}
-                initial={{ opacity: 0, x: -20 }}
+                onClick={() => { handleDownloadResume(); setIsMobileMenuOpen(false); }}
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold"
+                initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/50 transition-all justify-center"
+                transition={{ delay: navLinks.length * 0.07 }}
               >
-                <Download size={18} />
-                Download Resume
+                <Download size={20} /> Download Resume
               </motion.button>
             </div>
           </motion.div>
@@ -128,4 +120,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
