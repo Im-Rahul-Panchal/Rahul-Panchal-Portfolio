@@ -27,13 +27,34 @@ const Navbar = () => {
     link.click();
   };
 
+  const handleNavClick = (e, href) => {
+  e.preventDefault();
+
+  setIsMobileMenuOpen(false); // close first
+
+  setTimeout(() => {
+    const section = document.querySelector(href);
+
+    if (section) {
+      const offset = 80;
+      const top =
+        section.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
+    }
+  }, 300); // ⬅️ important delay (match animation)
+};
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'backdrop-blur-2xl bg-black/70 shadow-2xl' 
+        isScrolled
+          ? 'backdrop-blur-2xl bg-black/70 shadow-2xl'
           : 'bg-transparent'
       }`}
     >
@@ -53,6 +74,7 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)} // ✅ added
                 className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-gradient-to-r after:from-blue-500 after:to-purple-500 after:w-0 hover:after:w-full after:transition-all"
               >
                 {link.name}
@@ -61,7 +83,7 @@ const Navbar = () => {
 
             <motion.button
               onClick={handleDownloadResume}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm hover:shadow-xl hover:shadow-purple-500/40 transition-all"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -72,14 +94,14 @@ const Navbar = () => {
           {/* Mobile Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-3"
+            className="md:hidden text-white p-3 cursor-pointer rounded-lg hover:bg-white/10 transition"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu - Enhanced Glass */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -93,7 +115,7 @@ const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)} // ✅ FIX HERE
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }}
@@ -102,8 +124,12 @@ const Navbar = () => {
                   {link.name}
                 </motion.a>
               ))}
+
               <motion.button
-                onClick={() => { handleDownloadResume(); setIsMobileMenuOpen(false); }}
+                onClick={() => {
+                  handleDownloadResume();
+                  setIsMobileMenuOpen(false);
+                }}
                 className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
