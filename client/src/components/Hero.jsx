@@ -56,7 +56,7 @@ const Hero = () => {
           
           {/* Greeting */}
           <motion.p
-            className="text-sm sm:text-xl text-blue-400 font-medium tracking-widest mb-2 sm:mb-3"
+            className="text-lg sm:text-xl text-blue-400 font-medium tracking-widest mb-2 sm:mb-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -66,7 +66,7 @@ const Hero = () => {
 
           {/* Name */}
           <motion.h1
-            className="text-4xl sm:text-7xl md:text-[6.5rem] font-bold mb-4 sm:mb-6 leading-tight sm:leading-none"
+            className="text-6xl sm:text-7xl md:text-[6.5rem] font-bold mb-4 sm:mb-6 leading-tight sm:leading-none"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -78,7 +78,7 @@ const Hero = () => {
 
           {/* Role */}
           <motion.h2
-            className="text-xl sm:text-4xl md:text-5xl font-semibold text-zinc-200 mb-5 sm:mb-8 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold text-zinc-200 mb-5 sm:mb-8 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
