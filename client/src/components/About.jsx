@@ -6,7 +6,7 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-20 md:py-28 px-4 sm:px-6 bg-[#0a0a0a]" ref={ref}>
+    <section id="about" className="py-6 md:py-28 px-4 sm:px-6 bg-[#0a0a0a]" ref={ref}>
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

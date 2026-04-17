@@ -42,7 +42,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 px-4 sm:px-6 bg-[#0a0a0a]" ref={ref}>
+    <section id="contact" className="py-12 md:py-28 px-4 sm:px-6 bg-[#0a0a0a]" ref={ref}>
       <div className="max-w-4xl mx-auto">
 
         {/* Heading */}

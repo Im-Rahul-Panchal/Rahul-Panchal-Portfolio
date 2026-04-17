@@ -48,7 +48,7 @@ const Experience = () => {
 ];
 
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-transparent to-blue-500/5" ref={ref}>
+    <section id="experience" className="py-16 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-transparent to-blue-500/5" ref={ref}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
