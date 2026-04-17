@@ -28,25 +28,23 @@ const Navbar = () => {
   };
 
   const handleNavClick = (e, href) => {
-  e.preventDefault();
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
 
-  setIsMobileMenuOpen(false); // close first
+    setTimeout(() => {
+      const section = document.querySelector(href);
+      if (section) {
+        const offset = 70; // slightly reduced for mobile
+        const top =
+          section.getBoundingClientRect().top + window.scrollY - offset;
 
-  setTimeout(() => {
-    const section = document.querySelector(href);
-
-    if (section) {
-      const offset = 80;
-      const top =
-        section.getBoundingClientRect().top + window.scrollY - offset;
-
-      window.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
-    }
-  }, 300); // ⬅️ important delay (match animation)
-};
+        window.scrollTo({
+          top,
+          behavior: 'smooth',
+        });
+      }
+    }, 300);
+  };
 
   return (
     <motion.nav
@@ -58,23 +56,25 @@ const Navbar = () => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          
+          {/* Logo */}
           <motion.a
             href="#"
-            className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+            className="text-lg sm:text-2xl font-bold tracking-tight sm:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
             whileHover={{ scale: 1.08 }}
           >
             Rahul Panchal
           </motion.a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8 lg:gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)} // ✅ added
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-gradient-to-r after:from-blue-500 after:to-purple-500 after:w-0 hover:after:w-full after:transition-all"
               >
                 {link.name}
@@ -83,20 +83,21 @@ const Navbar = () => {
 
             <motion.button
               onClick={handleDownloadResume}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300 cursor-pointer"
+              className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
             >
-              <Download size={18} /> Resume
+              <Download size={16} className="sm:w-[18px] sm:h-[18px]" />
+              Resume
             </motion.button>
           </div>
 
           {/* Mobile Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-3 cursor-pointer rounded-lg hover:bg-white/10 transition"
+            className="md:hidden text-white p-2 sm:p-3 cursor-pointer rounded-lg hover:bg-white/10 transition"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -110,12 +111,13 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden backdrop-blur-3xl bg-black/90 border-t border-white/10"
           >
-            <div className="px-6 py-8 space-y-6 text-lg">
+            <div className="px-4 sm:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6 text-base sm:text-lg">
+              
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)} // ✅ FIX HERE
+                  onClick={(e) => handleNavClick(e, link.href)}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }}
@@ -130,13 +132,15 @@ const Navbar = () => {
                   handleDownloadResume();
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold"
+                className="w-full flex items-center justify-center gap-2 sm:gap-3 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm sm:text-base"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.07 }}
               >
-                <Download size={20} /> Download Resume
+                <Download size={18} />
+                Download Resume
               </motion.button>
+
             </div>
           </motion.div>
         )}
